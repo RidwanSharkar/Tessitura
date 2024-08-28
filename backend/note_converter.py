@@ -1,4 +1,4 @@
-# Tessitura/Backend/note-converter.py 
+# Tessitura/backend/note_converter.py 
 import mido
 import os
 
@@ -26,12 +26,23 @@ def get_note_name(note_number, sharps=True):
 #============================================================================================================
 
 def generate_tabs(notes):
-    tabs = []
+    strings = { 'E': '', 'B': '', 'G': '', 'D': '', 'A': '', 'E_low': '' }
+    max_length = 0
     for note_name, note_number in notes:
         string, fret, octave = note_to_guitar_tab(note_number)
-        if string != 'X': 
-            tabs.append(f"{string} string, {fret} fret, octave {octave}")
-    return tabs
+        if string != 'X':
+            string_key = string + ('_low' if string == 'E' and octave < 3 else '')
+            strings[string_key] += str(fret) + '-'  
+
+            if len(strings[string_key]) > max_length:
+                max_length = len(strings[string_key])
+
+    for key in strings:
+        while len(strings[key]) < max_length:
+            strings[key] += '-'
+
+    tab_lines = [strings['E_low'], strings['A'], strings['D'], strings['G'], strings['B'], strings['E']]
+    return tab_lines
 
 #============================================================================================================
 
@@ -81,14 +92,3 @@ def note_to_guitar_tab(note_number):
         69: ('highE', 1, 5),  # A4
     } 
     return string_fret_map.get(note_number, ('X', 0, 0))  # Return (String, Fretnum, Octave) if note num is found in map
-
-#============================================================================================================
-
-midi_path = os.path.join('output', 'chorus.mid')
-notes = midi_to_notes(midi_path)
-tabs = generate_tabs(notes)
-for tab in tabs:
-    print(tab)
-
-#============================================================================================================
-#============================================================================================================

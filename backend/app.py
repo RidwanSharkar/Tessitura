@@ -1,13 +1,16 @@
+# Tessitura\backend\app.py
 from flask import Flask, jsonify
 import os
+from flask_cors import CORS  
 from midi_converter import audio_to_midi
 from note_converter import midi_to_notes, generate_tabs
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/convert', methods=['POST'])
 def convert_audio():
-    audio_path = 'input/chorus.WAV' # TEST RUN
+    audio_path = 'input/chorus.WAV'  # TEST RUN
     midi_path = 'output/chorus.mid'
     
     audio_to_midi(audio_path)

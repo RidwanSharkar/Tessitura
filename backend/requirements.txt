@@ -1,0 +1,9 @@
+librosa #librosa==0.10.2.post1
+# python c:/Users/Lenovo/Desktop/Tessitura/Backend/app.py LOCAL 
+mido
+# COMPATIBLE WITH LIBROSA - 
+# npm install react@18.2.0 react-native@0.74.5 @types/react@~18.2.79 typescript@~5.3.3
+# llvmlite numba
+# python -m pip install --only-binary :all: numba llvmlite     
+
+# npm install metro metro-config metro-react-native-babel-preset metro-core
