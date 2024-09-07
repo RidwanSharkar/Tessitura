@@ -1,1 +1,1 @@
-Trying to find music data with timestamps at the chorus of songs so I can feed the Machine Learner
+Trying to find/create music dataset (.mp3 or .wav) with chorus timestamps so I can feed the Machine Learner
